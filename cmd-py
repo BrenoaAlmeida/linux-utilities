@@ -1,0 +1,11 @@
+py --version #Mostra a versão do python
+
+py -m pip list #Mostra pacotes instalados na maquina
+
+py -m pip install --upgrade pip #Instala  atualizações para o PIP
+
+py -m pip show <NOME_PACOTE> #Mostra informações do pacote 
+
+py -m pip uninstall <NOME_PACOTE> #Desintala o pacote
+
+Instaling Collected packages => Instala dependecias do pacote em python que você instalou

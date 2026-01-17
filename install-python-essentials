@@ -1,0 +1,5 @@
+#!bin/bash
+
+sudo apt install python3 #Instalando Python
+sudo apt install python3-pip #Instalando gerenciador de pacotes
+sudo apt install python3-venv python3-dev build-essential #Instalando ferramentas de dev

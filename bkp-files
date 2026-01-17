@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Caminhos
+STORAGE_A="/mnt/A/docs"
+STORAGE_B="/mnt/B"
+DEVICE_B="/dev/sdb1"  # <-- Substitua pelo dispositivo real do Storage B
+
+# Verifica se o ponto de montagem de B já está montado
+if mountpoint -q "$STORAGE_B"; then
+    echo "[INFO] Storage B já está montado em $STORAGE_B"
+else
+    echo "[INFO] Storage B não está montado. Tentando montar..."
+    sudo mount "$DEVICE_B" "$STORAGE_B"
+    
+    # Verifica se a montagem foi bem-sucedida
+    if mountpoint -q "$STORAGE_B"; then
+        echo "[OK] Storage B montado com sucesso!"
+    else
+        echo "[ERRO] Falha ao montar o Storage B. Abortando..."
+        exit 1
+    fi
+fi
+
+# Verifica se a pasta de origem existe
+if [ ! -d "$STORAGE_A" ]; then
+    echo "[ERRO] Pasta de origem $STORAGE_A não existe!"
+    exit 1
+fi
+
+# Copia os arquivos da pasta docs do Storage A para o Storage B
+echo "[INFO] Copiando $STORAGE_A para $STORAGE_B"
+cp -r "$STORAGE_A" "$STORAGE_B"
+
+# Verifica se a cópia foi bem-sucedida
+if [ $? -eq 0 ]; then
+    echo "[OK] Pasta 'docs' copiada com sucesso para o Storage B!"
+else
+    echo "[ERRO] Falha ao copiar a pasta!"
+    exit 1
+fi
+

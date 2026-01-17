@@ -11,4 +11,5 @@ if [ -z ${3+x} ];
 	  filename=$3
   fi
 
-sudo ffmpeg -i $video -i $audio -c:v copy -c:a aac -strict experimental "$filename"
+#sudo ffmpeg -i $video -i $audio -c:v copy -c:a aac -strict experimental "$filename"
+sudo ffmpeg -fflags +genpts -i "$video" -i "$audio" -c:v copy -c:a aac -b:a 192k -shortest "$filename"

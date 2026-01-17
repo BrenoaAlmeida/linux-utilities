@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# ===========================
+# Script de compressão extrema usando 7z
+# ===========================
+
+# Verifica se os parâmetros foram passados
+if [ $# -ne 2 ]; then
+  echo "Uso: $0 <arquivo_ou_pasta_de_entrada> <arquivo_de_saida_sem_extensão>"
+  echo "Exemplo: $0 /home/user/pasta dados_comprimidos"
+  exit 1
+fi
+
+# Entrada e saída
+entrada="$1"
+saida="$2"
+
+# Verifica se o arquivo ou pasta existe
+if [ ! -e "$entrada" ]; then
+  echo "Erro: o arquivo ou diretório '$entrada' não existe!"
+  exit 2
+fi
+
+# Inicia a compressão
+7z a -t7z "${saida}.7z" "$entrada" \
+  -mx=9 \             # Nível máximo de compressão (0 a 9)
+  -m0=lzma2 \         # Usa o algoritmo LZMA2 (melhor compressão para dados gerais)
+  -mfb=273 \          # Número máximo de fast bytes (quanto maior, melhor compressão)
+  -md=2048m \         # Tamanho do dicionário de compressão: 2 GB (melhor compressão, exige muita RAM)
+  -ms=on \            # Ativa "solid mode" (eficiente para muitos arquivos pequenos ou repetitivos)
+  -mmt=on \           # Ativa uso de múltiplos threads (acelera o processo)
+  -mmf=bt3 \          # Usa filtro de correspondência binária (bom para arquivos binários)
+  -mmc=10000          # Define o número de ciclos de busca por correspondência (quanto maior, melhor compressão)
+
+# Finaliza
+echo "Compressão concluída: ${saida}.7z"
+

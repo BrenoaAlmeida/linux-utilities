@@ -1,0 +1,3 @@
+#!/bin/bash
+
+batcat /mnt/Barracuda/Documentos/Texto/docker-commands.txt

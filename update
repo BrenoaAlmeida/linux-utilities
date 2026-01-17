@@ -1,13 +1,25 @@
 #!/bin/bash
 
-echo "Executando update, upgrade e autoRemove"
+echo '|=====================|'
+echo '|Atualizando o sistema|'
+echo '|=====================|'
+echo ''
 sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y
 
-echo "Atualizando FlatPacks"
+echo '|=====================|'
+echo '|Atualizando FlatPacks|'
+echo '|=====================|'
+echo ''
 sudo flatpak update
 
-echo "Atualizando Spices"
+echo '|==================|'
+echo '|Atualizando Spices|'
+echo '|==================|'
+echo ''
 cinnamon-spice-updater --update-all
 
-echo "Listando pacotes que não foram atualizados por causa de conflitos"
+echo '|=================================================================|'
+echo '|Listando pacotes que não foram atualizados por causa de conflitos|'
+echo '|=================================================================|'
+echo ''
 apt list --upgradable

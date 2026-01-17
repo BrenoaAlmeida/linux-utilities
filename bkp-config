@@ -1,3 +1,0 @@
-#!/bin/bash
-
-sudo cp -r /home/yiazmat/.config/kitty/. /mnt/A400/Scripts/Linux-Utilities/.config/kitty/

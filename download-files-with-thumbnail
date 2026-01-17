@@ -2,7 +2,7 @@
 
 ids=($PLAYLIST_IDS)
 
-url='https://www.youtube.com/watch?v='
+url=($URL)
 
 for id in ${ids[@]};do
     sudo yt-dlp -f bestaudio "$url$id" -x --embed-thumbnail --add-metadata

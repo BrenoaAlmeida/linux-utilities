@@ -53,20 +53,25 @@ case ${answer:0:1} in
 esac
 }
 
+installAniCli(){
+	read -p "Você deseja instalar o programa Ani-Cli e suas dependencias (y/n)?  " answer
+	case ${answer:0:1} in
+	y|Y )
+	sudo apt install ani-cli
+	sudo apt install mpv
+	sudo touch mpv.conf
+	sudo bash -c 'echo "#Audio \n ao=alsa \n audio-device=auto" >> mpv.conf
+	sudo mv mpv.conf ~/.config/mpv/mpv.conf
+}
+
 echo "Obtendo permissoes para instalar programas"
 sudo echo "Permissoes obtidas"
 
 sudo apt install figlet -y
 
-packages=(default-jre synaptic libreoffice cpufetch steam deluge gparted htop nvim vlc 7z kitty fzf firefox tldr thunderbird speedtest-cli bat)
+packages=($GENERIC_PACKAGES)
 
-flatpacks=(org.duckstation.DuckStation
-	   com.dec05eba.gpu_screen_recorder
-	   io.github.jeffshee.Hidamari
-	   rest.insomnia.Insomnia
-	   com.visualstudio.code
-	   net.lutris.Lutris
-)
+flatpacks=($FLATPACKS)
 
 for package in ${packages[@]};do
 	printBanner $package
@@ -74,7 +79,7 @@ for package in ${packages[@]};do
 done
 
 for flatpak in ${flatpacks[@]};do
-	installFlatpak $flatpak
+		installFlatpak $flatpak
 done
 
 printBanner Yt-Dlp
@@ -86,3 +91,6 @@ kitten themes --reload-in=all Tokyo Night #Mudar Tema do Terminal
 sudo mkdir /usr/share/fonts/firacode
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/FiraCode.zip #Baixando fonte para o terminal
 sudo 7z x FiraCode.zip -o/usr/share/fonts/firacode/
+
+printBanner Ani-Cli
+installAniCli

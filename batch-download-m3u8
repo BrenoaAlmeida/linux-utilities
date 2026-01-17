@@ -1,8 +1,5 @@
 #!/bin/bash
 resolution='res:1920x1080'
-defaut_folder="$YT_DLP_FOLDER/Outros/Aulas Leo"
-maquina_dividendos="$default_folder/Máquina de Dividendos - Opções"
-mentoria_dividendos="$defalt_folder/Mentoria Geração Dividendos"
-metodo2em1="$default_folder/Metodo2em1"
+defaut_folder="$YT_DLP_FOLDER/default"
 
 
